@@ -1,13 +1,37 @@
-from fastapi import FastAPI
+"""
+Profanity Masking API - TADD Web Service
+"""
+
+from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from profanity import mask_profanity
 
-app = FastAPI(title="Profanity Masking API")
+app = FastAPI(
+    title="Profanity Masking API",
+    description="Educational TADD exercise API",
+    version="1.0.0"
+)
+
 
 class TextRequest(BaseModel):
     text: str
 
-@app.post("/mask")
-def mask_text(request: TextRequest):
-    masked = mask_profanity(request.text)
-    return {"masked_text": masked}
+
+class TextResponse(BaseModel):
+    masked_text: str
+
+
+@app.post("/mask", response_model=TextResponse)
+def mask_text(request: TextRequest) -> TextResponse:
+    """
+    Mask profanity in input text.
+    
+    - Preserves first letter, masks rest with *
+    - Case-insensitive banned words: damn, hell, crap
+    - Returns original text if no profanity found
+    """
+    try:
+        masked = mask_profanity(request.text)
+        return TextResponse(masked_text=masked)
+    except ValueError:
+        raise HTTPException(status_code=422, detail="Invalid input: text cannot be None")
