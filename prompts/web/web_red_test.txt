@@ -1,0 +1,29 @@
+You are junior developer under senior architect supervision.
+
+TADD Phase 2: Write API tests for FastAPI profanity masking service.
+
+=== CURRENT main.py ===
+from fastapi import FastAPI
+from pydantic import BaseModel
+from profanity import mask_profanity
+
+app = FastAPI(title="Profanity Masking API")
+
+class TextRequest(BaseModel):
+    text: str
+
+@app.post("/mask")
+def mask_text(request: TextRequest):
+    raise NotImplementedError
+
+
+Test Requirements (pytest + pytest-httpx):
+1. POST /mask {"text": "hello"} → 200 {"masked_text": "hello"}
+2. POST /mask {"text": "damn you"} → 200 {"masked_text": "d*** you"}
+3. POST /mask {"text": ""} → 200 {"masked_text": ""}
+4. POST /mask {"text": null} → 422 validation error
+5. POST /mask no body → 422 validation error
+
+Expect ALL tests to FAIL currently (NotImplementedError).
+
+Output ONLY complete test_main.py content. No explanations.

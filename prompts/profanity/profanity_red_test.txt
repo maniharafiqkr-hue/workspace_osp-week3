@@ -1,0 +1,53 @@
+You are my junior developer. I am the senior architect.
+
+We are practicing TADD (Test + AI Driven Development) with pytest in Python.
+Your ONLY task in this step is to write failing tests (RED).
+Do NOT implement the production code.
+
+Project context:
+- Repository already initialized with Git
+- I am currently on a branch named "test"
+- There is an empty file: profanity.py
+
+=== SPECIFICATION (mask_profanity) ===
+Function:
+    def mask_profanity(text: str) -> str
+
+Rules:
+1. Banned words (case-insensitive):
+   - "damn"
+   - "hell"
+   - "crap"
+   - "shit"
+   - "stupid"
+2. Masking rule:
+   - Keep the first character
+   - Replace the remaining characters of the word with "*"
+   - Example: "damn" -> "d***"
+3. Preserve original spacing and punctuation in the sentence.
+4. If text == "":
+   - Return empty string "".
+5. If text is None:
+   - Raise ValueError.
+
+Your job:
+- Create pytest tests in a file named test_profanity.py.
+- Use clear test function names following pytest conventions (test_*).
+- Cover at least these scenarios:
+  1) Single banned word in the middle of a sentence.
+  2) Multiple banned words in one sentence.
+  3) Uppercase and mixed-case versions of the banned words.
+  4) Banned word followed by punctuation (e.g. "hell!").
+  5) A sentence with no banned words (should be unchanged).
+  6) Empty string input.
+  7) None input (should raise ValueError).
+
+Constraints:
+- Tests must import the function as: `from profanity import mask_profanity`
+- Do NOT add any implementation in profanity.py.
+- Make sure the tests would currently FAIL because mask_profanity is not implemented yet.
+- Use only standard pytest style (no external plugins).
+
+Output:
+- Return ONLY the complete content of test_profanity.py.
+- Do not add explanations or comments outside the code block.
