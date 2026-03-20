@@ -9,4 +9,5 @@ class TextRequest(BaseModel):
 
 @app.post("/mask")
 def mask_text(request: TextRequest):
-    raise NotImplementedError
+    masked = mask_profanity(request.text)
+    return {"masked_text": masked}
