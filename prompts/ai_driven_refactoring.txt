@@ -1,0 +1,22 @@
+# AI Collaboration Log - Prompts Used for Refactoring
+
+**Prompt 1: Strategic Analysis & Smell Identification**
+"Review the provided FastAPI application code (`main.py` and `profanity.py`). 
+Act as a senior software architect and identify at least 5 code smells. 
+Focus specifically on violations of SOLID principles, 
+looking for instances of Primitive Obsession, 
+Single Responsibility Principle (SRP) violations, 
+and Dependency Inversion Principle (DIP) violations."
+
+**Prompt 2: Requesting Architectural Options**
+"Based on the 5 identified code smells, propose two distinct refactoring strategies. 
+One strategy should focus on lightweight Functional/Dependency Injection, 
+and the other should apply a formal Object-Oriented approach. 
+Outline the pros, cons, and trade-offs of each regarding testability and future extensibility."
+
+**Prompt 3: Commanding Pattern Application**
+"I have evaluated the options and decided to proceed with the Object-Oriented approach. 
+Refactor `profanity.py` to encapsulate the state and behavior into a `ProfanityFilter` class, 
+allowing the banned words set to be injected via the constructor. 
+Then, update the FastAPI route in `main.py` to depend on an instance of this class to 
+resolve the DIP violation. Ensure the external API contract remains 100% identical."
